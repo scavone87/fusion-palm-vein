@@ -41,7 +41,7 @@ arrayTemplate1 = template1(2:end);
 arrayFileName1 = arrayFileName1(2:end);
 
 
-%% -----
+%% 
 
 directoryTemplate2 = uigetdir(pwd,'Selezionare la directory contenente i template .dat del db2 (risultati/Nome/.dat)');
 cartellaTemplate2 = [directoryTemplate2 '\'];
