@@ -80,7 +80,6 @@ BWz = bwareaopen(prun, 30);
 altro= strel('disk', 6);
 fileDat= imdilate( BWz, altro);
 %imwrite(nonloso,strcat(nomeUtente,'_12_dilatazioneW.jpg'));
-%imshow(nonloso)
 %dlmwrite(strcat(nomeUtente,'W.dat'),fileDat);
 
 
