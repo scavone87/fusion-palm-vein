@@ -97,4 +97,3 @@ fileDat= imdilate( BWz, altro);
 %imshow(inputImage)
 
 %imwrite(outputImage, strcat(nomeUtente,'_13_FinaleW.jpg'));
-%3529504 / 566600
