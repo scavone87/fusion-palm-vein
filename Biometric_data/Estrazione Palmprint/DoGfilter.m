@@ -1,7 +1,7 @@
 function [dilatedImageDat,rgbImage]= DoGfilter(fullPathName,nomeSalv)
 
 tic;
-%LLETTURA IMMAGINE
+%LETTURA IMMAGINE
 I = imread(fullPathName);
 
 %RESIZE DELL'IMMAGINE
@@ -95,14 +95,14 @@ rgbImage = cat(3, im1, im1, im1);
 % imshow(rgbImage)
 nomeSovrapposizione = split(fullPathName, '\');
 nomeSovrapposizione = string(nomeSovrapposizione(end-1));
-risultati = 'C:\PcLab\Fusion Palm-Vein\Biometric_data\Estrazione Palmprint\risultati\'
-folderS = 'template2Dsovrapposti';
+risultati = 'C:\PcLab\Fusion Palm-Vein\Biometric_data\Estrazione Palmprint\risultati\';
+folderS = 'template2DsovrappostiDoG';
 folderSovrapp = fullfile(risultati, folderS);
 if ~exist(folderSovrapp, 'dir')
     disp('La cartella non esiste')
     mkdir(folderSovrapp); 
 end
-pathSovrapposizione = fullfile(folderSovrapp, '\', nomeSovrapposizione)
+pathSovrapposizione = fullfile(folderSovrapp, '\', nomeSovrapposizione);
 if ~exist(pathSovrapposizione, 'dir')
     mkdir(pathSovrapposizione);
 end

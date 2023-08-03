@@ -1,13 +1,14 @@
-function [dilatedImageDat,rgbImage]=templateSRAD(fullpathName)
+function [dilatedImageDat,rgbImage]=templateSRAD(fullpathName, nomeSalv)
 
 tic
 %APPLICAZIONE FILTRO WAVELET
 inputImage = imread(fullpathName);
+im1=imresize(inputImage, 0.25, 'bicubic'); % imposto la grandezza dell'immagine mantenendo le proporzioni
 %filename='micheleLigrani_5';
 %inputImage=imread(strcat(fullpathName,'.jpg'));
 rect = [10 15 40 40]; 
 
-[filteredImage] = SRAD(inputImage,40,0.9,rect); %SRAD3(inputImage,40,0.9,rect);
+[filteredImage] = SRAD(im1,4,0.2,rect); %SRAD3(inputImage,40,0.9,rect);
 %outputImage = filtroWavelet(inputImage,30);
 %[filteredImage] = fcnFrostFilter(outputImage);
 
@@ -73,20 +74,20 @@ BWz = bwareaopen(prun, 30);
 %imwrite(BWz, strcat(filename,'_lineePicc.jpg'));
 
 %DILATAZIONE WARING RIMETTERE COME PRIMA DISK 6
-dilatation_mask= strel('disk', 6);
+dilatation_mask= strel('disk', 1);
 dilatedImageDat= imdilate(BWz, dilatation_mask);
 
 %imshow(dilatedImageDat); title('dilatazione'); figure;
 %dlmwrite(strcat(filename,'.dat'),dilatedImageDat);
 %imwrite(dilatedImageDat,strcat(fullpathName,'_dilatazione.jpg'))
 
-rgbImage = cat(3, inputImage, inputImage, inputImage);
+rgbImage = cat(3, im1, im1, im1);
 
 %SOVRAPPOSIZIONE %%WARNING:RIMETTERE COME PRIMA
 [m n1]= size(inputImage);
  for i=1 : m
     for j=1 : n1
-        if  BWz(i,j)==1
+        if  dilatedImageDat(i,j)==1
         %inputImage(i,j)=255;
         rgbImage(i,j,1)=255;
         rgbImage(i,j,2)=255;
@@ -94,9 +95,26 @@ rgbImage = cat(3, inputImage, inputImage, inputImage);
         end 
     end 
  end	 
-figure
-rgbImage=imrotate(rgbImage,90);
-imshow(rgbImage);title('template');
+% figure
+% rgbImage=imrotate(rgbImage,90);
+% imshow(rgbImage);title('template');
+nomeSovrapposizione = split(fullPathName, '\');
+nomeSovrapposizione = string(nomeSovrapposizione(end-1));
+risultati = 'C:\PcLab\Fusion Palm-Vein\Biometric_data\Estrazione Palmprint\risultati\'
+folderS = 'template2DsovrappostiSRAD';
+folderSovrapp = fullfile(risultati, folderS);
+if ~exist(folderSovrapp, 'dir')
+    disp('La cartella non esiste')
+    mkdir(folderSovrapp); 
+end
+pathSovrapposizione = fullfile(folderSovrapp, '\', nomeSovrapposizione)
+if ~exist(pathSovrapposizione, 'dir')
+    mkdir(pathSovrapposizione);
+end
+fig = imshow(rgbImage); 
+fileName = strcat(nomeSovrapposizione, '_', num2str(nomeSalv));
+name = fullfile(pathSovrapposizione, fileName);
+saveas(fig,name,'jpg');
 
 toc
 %imwrite(rgbImage, strcat(filename,'_template.png'));

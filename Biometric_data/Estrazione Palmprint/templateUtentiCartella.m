@@ -53,7 +53,7 @@ for k=1:sizeSubFolders
         fullPathName=[pathNameSubDirectory '\' filesJpg(i).name];
         switch choice
             case 'SRAD'
-            [fileDat, outputImage]=templateSRAD(fullPathName);
+            [fileDat, outputImage]=templateSRAD(fullPathName, nomeSalv);
             case 'Frost'
             [fileDat,outputImage]=templateFrost(fullPathName);%, fullPathName); 
             case 'DoG'
