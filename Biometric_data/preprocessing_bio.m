@@ -19,14 +19,14 @@ end
 
 %% Salvataggio dei dati
 folderMatfiles = 'Matfiles';
-if exist(folderMatfiles, 'dir') == 0 
+if ~exist(folderMatfiles, 'dir')
     mkdir(pwd, folderMatfiles); 
 end
 matFolder = fullfile(pwd, folderMatfiles, '\');
-out=regexp(pathnameUOB,'\','split');
-% nomeAcquisizione = strcat(string(out(end)), filenameuob(6:9), ".mat"); % per lo script di creazione automatica del database dei .mat
+out=regexp(pathnameUOB,'\','split')
+nomeAcquisizione = strcat(string(out(end)), filenameuob(6:9), ".mat"); % per lo script di creazione automatica del database dei .mat
 
-nomeAcquisizione = strcat(string(out(end-1)), filenameuob(6:9), ".mat"); % per la creazione dei singoli .mat
+% nomeAcquisizione = strcat(string(out(end-1)), filenameuob(6:9), ".mat"); % per la creazione dei singoli .mat
 matFile = strcat(matFolder, nomeAcquisizione);
 save(matFile,"M","X","Y","Z","pixel_length");
 % save file.mat M X Y Z    

@@ -14,7 +14,7 @@ function [ matriceOutput ] = generaMatriceContenenteTemplate(matFile)
     
     matriceTemplate =  zeros(sizeTemplate(1),sizeTemplate(2),12);
     
-    for (i=2:6)    
+    for (i=1:6)    
         
         index = i;
         
@@ -24,7 +24,7 @@ function [ matriceOutput ] = generaMatriceContenenteTemplate(matFile)
         
         currentTemplate = eval(name);
         
-        matriceTemplate(:,:,i-1) = currentTemplate;
+        matriceTemplate(:,:,i) = currentTemplate;
         
 %       figure;imshow(currentTemplate);
         

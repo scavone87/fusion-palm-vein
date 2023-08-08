@@ -57,7 +57,7 @@ for k=1:sizeSubFolders
             case 'Frost'
             [fileDat,outputImage]=templateFrost(fullPathName);%, fullPathName); 
             case 'DoG'
-            [fileDat,outputImage]= DoGfilter(fullPathName, nomeSalv);
+            [fileDat,outputImage]= DoGfilterLS(fullPathName, nomeSalv);
 
             otherwise 
                 errordlg('Non hai selezionato alcun filtro','Errore')
