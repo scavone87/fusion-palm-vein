@@ -13,7 +13,7 @@ K = zeros(dimX, dimY);
 
 % Ciclo su dimY (sezioni orizzontali dell'immagine)
 for i = 1:dimY
-    disp(i)
+    % disp(i)
     
     % Lettura dei dati dalla variabile DataObj
     Read(DataObj, 'firstPri', dimX*(i-1)+1, 'npri', dimX);

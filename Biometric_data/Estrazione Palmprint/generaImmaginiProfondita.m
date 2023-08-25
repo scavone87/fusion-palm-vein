@@ -1,31 +1,33 @@
-% CARICA IL FILE .MAT E RESTITUISCE L'IMMAGINE DEL PALMO
-function [] = generaImmaginiProfondita(matFile,percorso)
-    load (strcat(percorso,matFile,'.mat'));
+% load (strcat(pwd,matFile,'.mat'));
+clearvars -except v pixel_length
 
-    %PARAMETRI
-    tresh=64;   % Intensity treshold for surface detection (0 - 255)
-    filter_siz=20;  % Averaging filter
-    
-    FFFF=zeros(542,814,11);
-    
-    %estraggo la cartella del database
-    k = strfind(percorso,'mat\');
-    dirPart = percorso(1:k-1);
-    path=strcat(dirPart,'imageGeneratedFrom3D\',matFile);
-    
-    if ~exist(path, 'dir')
-        mkdir(path);
+[filenamemat, pathnamemat] = uigetfile({'*.mat'},'SELECT CAPTURE .mat');
+fileMAT=strcat(pathnamemat,filenamemat);
+load(fileMAT);
 
-        for i=1:6
-            depth=i*0.05;
-            surface_detection;
-            %[FileName, PathName] = uiputfile('*.jpg','Salva immagine: ');
-            FileName=strcat( 'immagine', num2str( depth ),'.jpg' )
-            Name = fullfile(path, FileName);
-            %Name = fullfile(PathName, FileName);
-            imwrite(FFF, Name, 'jpg');
-            FFFF(:,:,i)=FFF;
-        end
-    end
+tresh = 64;
+filter_siz = 20;
+    
+sz = size(M);
+FFFF=zeros(sz(2),sz(3),sz(1)); % DIMX, DIMY E DIMZ PRESE DALLA MATRICE M
 
+%estraggo la cartella del database
+
+path=strcat(pwd,'\imageGeneratedFrom3D\',filenamemat(1:end-4));
+
+if ~exist(path, 'dir')
+    mkdir(path);
+end
+
+depth = 0;
+
+for i=2:7
+    depth=i*pixel_length;
+    surface_detection;
+    %[FileName, PathName] = uiputfile('*.jpg','Salva immagine: ');
+    FileName=strcat( 'immagine_', num2str(i-1), "_",num2str( depth ),'.jpg' )
+    Name = fullfile(path, FileName);
+    %Name = fullfile(PathName, FileName);
+    imwrite(FFF, Name, 'jpg');
+    FFFF(:,:,i)=FFF;
 end

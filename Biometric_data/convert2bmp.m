@@ -3,9 +3,9 @@
 %basta commentare la riga   X=X.*S
 
 X=zeros(dimZ,dimX,dimY);
-disp(dimY);
-disp(dimZ);
-disp(dimX);
+fprintf("Dimensione X: %.0f \n", dimX);
+fprintf("Dimensione Y: %.0f \n", dimY);
+fprintf("Dimensione Z: %.0f \n", dimZ);
 for i=1:dimY
     Read(DataObj,'firstPri',dimX*(i-1)+1,'npri',dimX);
     x=abs(DataObj.LastReadData);

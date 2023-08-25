@@ -1,0 +1,9 @@
+tic
+
+generaImmaginiProfonditaLSParallel;
+generaTemplate2DParallel;
+generaTemplate3D;
+identificazioneMatching2D_CPUParallel;
+identificazioneMatching3D_CPUParallel;
+
+toc

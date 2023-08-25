@@ -1,5 +1,8 @@
+clear all
+clc
+
 % Richiedi all'utente di selezionare la cartella contenente i file da rinominare
-pathnameUOB = uigetdir('Seleziona la cartella contenente i file da rinominare');
+pathnameUOB = uigetdir('Seleziona la cartella contenente i file da convertire');
 
 % Controlla se l'utente ha annullato la selezione della cartella
 if pathnameUOB == 0
@@ -42,5 +45,5 @@ for i=1 : size(fileList,1)
     save visualization_info.mat v dimX dimY dimZ profondita_campo scansione_meccanica lunghezza_sonda phys_pitch repr_pitch pixel_length
     eliminaResidui;
     convert2bmp;
-    pre_processing_scavone;
+    preprocessing_bio;
 end

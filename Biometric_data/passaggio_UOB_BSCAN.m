@@ -1,3 +1,28 @@
+%% Script di Elaborazione dei Dati Ultrasuoni
+% 
+% Questo script MATLAB è progettato per elaborare dati provenienti da una scansione a ultrasuoni da una sonda medica. Ecco una panoramica delle operazioni svolte:
+% 
+%     1. Caricamento dei Dati
+%         Il codice inizia pulendo il workspace e la console.
+%         Viene mostrata una finestra di dialogo per selezionare un file .uob contenente i dati della scansione.
+%         Il percorso e il nome del file vengono memorizzati.
+%         I dati vengono caricati in un oggetto DataObj utilizzando una classe di gestione dei dati.
+% 
+%     2. Estrazione delle Informazioni sull'Acquisizione
+%         Diverse informazioni vengono estratte dal file .uob, inclusi le dimensioni dell'immagine 3D e i parametri dell'acquisizione (dimensioni X, Y, Z, profondità di campo, velocità del suono, frequenza di campionamento, ecc.).
+% 
+%     3. Calcoli per l'Interpolazione
+%         Viene creato un oggetto di visualizzazione (v) per eseguire calcoli.
+%         Utilizzando la velocità del suono e la frequenza di campionamento, viene calcolata la lunghezza di un pixel nell'immagine.
+%         La risoluzione lungo l'asse Y viene calcolata.
+%         Viene stimata una nuova dimensione X basata sulla lunghezza della sonda e dei pixel.
+%         Le informazioni vengono salvate in un file visualization_info.mat.
+% 
+%     4. Elaborazione e Conversione
+%         Viene richiamato uno script o una funzione chiamata eliminaResidui per un'elaborazione specifica (dettagli mancanti nell'estratto).
+%         Successivamente, si richiama convert2bmp per convertire i dati elaborati in immagini BMP (dettagli mancanti nell'estratto).
+% 
+
 close all
 clear
 clc

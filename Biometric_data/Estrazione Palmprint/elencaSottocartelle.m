@@ -5,8 +5,8 @@
 %le informazioni desiderate e sizeSubFolders contenente il numero di
 %subFolders
 
-directory = uigetdir(['..\.'],'Selezionare la directiory contenetne le sottocartelle degli utenti (esempio "ACQUISIZIONI")') ;
-
+% directory = uigetdir(['..\.'],'Selezionare la directiory contenetne le sottocartelle degli utenti (esempio "ACQUISIZIONI")') ;
+directory = fullfile(pwd, 'imageGeneratedFrom3D');
 
 
 % Get a list of all files and folders in this folder.
