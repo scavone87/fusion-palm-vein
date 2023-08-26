@@ -28,6 +28,7 @@ mkdir(fullfile(template3DIstantiDir, 'istante006'));
 mkdir(fullfile(template3DIstantiDir, 'istante007'));
 mkdir(fullfile(template3DIstantiDir, 'istante008'));
 mkdir(fullfile(template3DIstantiDir, 'istante009'));
+mkdir(fullfile(template3DIstantiDir, 'istante010'));
 
 
 files=dir(fullfile(path, '*.mat'));

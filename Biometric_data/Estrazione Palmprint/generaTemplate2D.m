@@ -47,6 +47,7 @@ for k = 1:numFiles
        
     end
      waitbar(k/length(numFiles), wbar);
+
 end
 
 % Fine tempo di esecuzione dello script principale
