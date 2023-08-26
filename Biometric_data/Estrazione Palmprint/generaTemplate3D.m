@@ -1,8 +1,6 @@
 % !!! Genera i template 3D e li salva nella cartella Template3D divisi per istante !!!
 addpath("lib\");
-clear all;
-
-clc; 
+clear -except startTime_mainScript;
 close all;
 
 % Verifica se il cluster è già attivo
@@ -13,7 +11,7 @@ if isempty(currentPool)
     parpool(); % Inizializza il pool parallelo
 end
 
-tic
+startTime_generaTemplate3D = tic;
 path = fullfile(fileparts(pwd), 'Matfiles');
 dirs=dir(fullfile(path));
 
@@ -40,4 +38,7 @@ parfor contatore=1:elementi
     generaTemplate(corrente,template3DDir, template3DIstantiDir);
 end
 
-toc
+% Fine tempo di esecuzione dello script principale
+endTime_generaTemplate3D = toc(startTime_generaTemplate3D);
+
+fprintf('Tempo di esecuzione dello script generaTemplate3D: %.2f secondi\n', endTime_generaTemplate3D);

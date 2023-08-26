@@ -1,4 +1,4 @@
-function [surf_filt_modified, FFF_modified] = surface_detection_modified(M, tresh, filter_siz, depth, Z)
+function [surf_filt_modified, FFF_modified] = surface_detection(M, tresh, filter_siz, depth, Z)
 
 SURF = flipdim(repmat(uint16((0:size(M,1)-1))', [1 size(M,2) size(M,3)]), 1);
 SURF(M <= tresh) = 0;

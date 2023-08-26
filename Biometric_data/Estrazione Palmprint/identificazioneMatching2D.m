@@ -1,10 +1,20 @@
 addpath("lib\");
-
-%clear all;
 clear files;
 %clc;
 
 disp('Identificazione CPU Parallelo')
+
+% switch choice
+%     case 'SRAD'
+%         folderName = 'Template3DSRAD';
+%     case 'Frost'
+%         folderName = 'Template3DFrost';
+%     case 'DoG'
+%         folderName = 'Template3DDoG';
+%     otherwise
+%         errordlg('Non hai selezionato alcun filtro','Errore')
+%         return
+% end
 
 % Verifica se il cluster è già attivo
 currentPool = gcp('nocreate');
@@ -19,18 +29,18 @@ end
 %     scelta='Template3D';
 % end
 
-% cartellaTemplate=uigetdir(pwd,'Seleziona la directory in cui sono salvati i template .dat')
-% cartellaTemplate = "C:\PcLab\Fusion Palm-Vein\Biometric_data\Estrazione Palmprint\Template3D\"
-cartellaTemplate = fullfile(pwd, '\template3D\Template3D\');
-% cartellaTemplate = [cartellaTemplate '\']
-%cartellaTemplate=strcat(saveDirRisultati,'Template3D','\') % inserire la cartella contenente i templates
+% cartellaTemplate=uigetdir(pwd,'Seleziona la directory in cui sono salvati i template .dat');
+% cartellaTemplate = [cartellaTemplate '\'];
+% %cartellaTemplate=strcat(saveDirRisultati,'Template3D','\') % inserire la cartella contenente i templates
+% dirs=dir(fullfile(cartellaTemplate));
+cartellaTemplate = fullfile(pwd, '\template2D\Template2D\');
 dirs=dir(fullfile(cartellaTemplate));
 
-
+startTime_identificazioneMatching2D = tic;
 sp=1;
 tabellaFinale=cell(sp,3);
 % [nomestructmat, pathstructmat]=uiputfile('.mat','Save struct .mat');
-nomestructmat = "Statistiche3D";
+nomestructmat = "Statistiche2D";
 pathstructmat = fullfile(pwd, '\');
 numeroCartella=3;
 numeroRisultato=1;
@@ -61,24 +71,23 @@ end
 arrayTemplate = template(2:end);
 arrayFileName = arrayFileName(2:end);
 
-tic
+
 n = length(arrayTemplate);%size(arrayTemplate,1);
 score = zeros(n);
 
 for i=1:n
     %tmp1 = cell2mat(arrayTemplate(i));
     tmp1 = arrayTemplate{i,1};
-    % fprintf('Valore di i: %0.f \n', i);
+    fprintf('Valore di i: %0.f \n', i);
     parfor j=(i+1):n
         % fprintf('Valore di j: %0.f \n', j);
         % tmp2 = cell2mat(arrayTemplate(j));
         tmp2 = arrayTemplate{j,1};
-        score(i,j) = matching13L(tmp1, tmp2);
-        disp(['confronto ' num2str(i) '.' num2str(j) ' effettuato']);
+        score(i,j) = matching2L(tmp1, tmp2);
+        % disp(['confronto ' num2str(i) '.' num2str(j) ' effettuato']);
     end
 end
 
-toc
 
 sp = 1;
 for i=1:n
@@ -94,3 +103,7 @@ end
 
 T=cell2table(tabellaFinale, 'VariableNames',{'Utente1' 'Utente2' 'Score'});
 save(strcat(pathstructmat,nomestructmat), 'T');
+% Fine tempo di esecuzione dello script principale
+endTime_identificazioneMatching2D = toc(startTime_identificazioneMatching2D);
+
+fprintf('Tempo di esecuzione dello script identificazioneMatching2D: %.2f secondi\n', endTime_identificazioneMatching2D);

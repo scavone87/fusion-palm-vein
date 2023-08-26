@@ -1,9 +1,13 @@
-tic
+% Inizio tempo di esecuzione dello script principale
+startTime_mainScript = tic;
 
-generaImmaginiProfonditaLSParallel;
-generaTemplate2DParallel;
+estrazioneImmaginiProfondita;
+generaTemplate2D;
 generaTemplate3D;
-identificazioneMatching2D_CPUParallel;
-identificazioneMatching3D_CPUParallel;
+identificazioneMatching2D;
+identificazioneMatching3D;
 
-toc
+% Fine tempo di esecuzione dello script principale
+endTime_mainScript = toc(startTime_mainScript);
+
+fprintf('Tempo di esecuzione dello script principale: %.2f secondi\n', endTime_mainScript);
