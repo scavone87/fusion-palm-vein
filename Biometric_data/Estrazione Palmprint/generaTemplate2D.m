@@ -33,9 +33,10 @@ for k = 1:numFiles
     end
     
     parfor i = 1:length(filesJpg)
-        num_istante = filesJpg(i).name(end-9:end-4);
-        utenteParts = strsplit(utenteCorrente, '_');
-        nomeUtente = sprintf('%s-%s-%s-%s', utenteParts{end-2:end}, num2str(num_istante));
+        profondita = filesJpg(i).name(end-9:end-4);
+        nomeUtente = sprintf('%s-%s', utenteCorrente, num2str(profondita));
+        % utenteParts = strsplit(utenteCorrente, '_');
+        % nomeUtente = sprintf('%s-%s-%s-%s', utenteParts{end-2:end}, num2str(profondita));
         
         fullPathName = fullfile(subFolderPath, filesJpg(i).name);
         [dilatedImageDat, rgbImage] = estrazioneLinee(fullPathName, i, nomeUtente); % Modificato nomeSalv

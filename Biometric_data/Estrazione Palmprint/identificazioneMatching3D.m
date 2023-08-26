@@ -49,7 +49,6 @@ for i=numeroCartella:length(dirs)
         k = k + 1;
         arrayFileName = [arrayFileName; cellstr(files(j).name)];
         nomeFile = char(strcat(cartella,arrayFileName(k+1)));
-        nomeFile
         template = [template; importdata(nomeFile)];
     end
 

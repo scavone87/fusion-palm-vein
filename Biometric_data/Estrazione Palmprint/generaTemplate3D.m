@@ -1,6 +1,6 @@
 % !!! Genera i template 3D e li salva nella cartella Template3D divisi per istante !!!
 addpath("lib\");
-clear -except startTime_mainScript;
+clearvars -except startTime_mainScript;
 close all;
 
 % Verifica se il cluster è già attivo
