@@ -1,30 +1,30 @@
-%close all;
-% clear all;
-%clc;
+close all;
+clear all;
+clc;
+
 
 [fileRisultati, path] = uigetfile('*.mat','Seleziona il file .mat dei risultati');
-% load Risultati3DCodiceMarino.mat;
 pathCompleto = [path fileRisultati];
-% load(fileRisultati);
 load(pathCompleto);
+pathStatistiche = uigetdir('', 'Seleziona cartella dove salvare le Statistiche');
 
 timeStr = strrep(datestr(now),':','-');
 k = strfind(fileRisultati,'.mat');
 sourceStr = fileRisultati(1:k-1);
-sName = ['Statistiche\', sourceStr, '\', timeStr];
+sName = [pathStatistiche, '/', sourceStr];
 mkdir(sName);
 
-matchT=height(T);%size(T);
+matchT=size(T);
 for i=1:matchT(1)
     Ut1=char(T.Utente1(i));
-    Ut1=strrep(Ut1,'.dat','');
-    nomeUt1=Ut1(1:(length(Ut1)-4));
-    cifreUt1=str2num(Ut1((length(Ut1)-2):end));
+    Ut1=strrep(Ut1,'.mat','');
+    nomeUt1=Ut1(1:(length(Ut1)-2));
+    cifreUt1=str2num(Ut1(end));
 
     Ut2=char(T.Utente2(i));
-    Ut2=strrep(Ut2,'.dat','');
-    nomeUt2=Ut2(1:(length(Ut2)-4));
-    cifreUt2=str2num(Ut2((length(Ut2)-2):end));
+    Ut2=strrep(Ut2,'.mat','');
+    nomeUt2=Ut2(1:(length(Ut2)-2));
+    cifreUt2=str2num(Ut2(end));
         
         if(strcmp(nomeUt1,nomeUt2)==1) %specificare l'uguaglianza tra stringhe
             T.Genuino(i)=1; 
@@ -39,7 +39,7 @@ impostore=0;
 tabellaGenuinoML=cell(1,3);
 tabellaImpostoreML=cell(1,3);
 
-match=height(T);%size(T);
+match=size(T);
 for i=1:match(1)
 
     pri=T{i,4};
@@ -76,32 +76,33 @@ TabImpML = cell2table(tabellaImpostoreML, 'VariableNames',{'Utente1' 'Utente2' '
 vec_gen=zeros(1,100);
 vec_imp=zeros(1,100);
 
-dime=height(TabGenML);%size(TabGenML);
+dime=size(TabGenML);
 for i=1:dime(1)
    valore=TabGenML.Score(i);
-%    valore=valore{1,1};
-   vec_gen(1,valore)=vec_gen(1,valore)+1;
+  % valore=valore{1,1};
+  if(valore~=0)
+      vec_gen(1,valore)=vec_gen(1,valore)+1;
+  end
+   
+      
 end
 
-% save('vec_gen.mat','vec_gen');
-% load vec_gen_Puliti.mat;
+ save('vec_gen.mat','vec_gen');
 
-dime=height(TabImpML);%size(TabImpML);
+dime=size(TabImpML);
 for i=1:dime(1)
    valore=TabImpML.Score(i);
-%    valore=valore{1,1};
-   vec_imp(1,valore)=vec_imp(1,valore)+1;
+ % valore=valore{1,1};
+ if(valore ~= 0)
+    vec_imp(1,valore)=vec_imp(1,valore)+1;
+ end
+ 
+
 end
 
-% save('vec_gen.mat','vec_gen');
-% save('vec_imp.mat','vec_imp');
+ save('vec_gen.mat','vec_gen');
+ save('vec_imp.mat','vec_imp');
 % 
-% load vec_gen5.mat;
-% load vec_imp.mat;
-
-% for f=1:30
-%     vec_gen(1,f)=0;
-% end
 
 %normalizziamo le curve
 max_genuino=max(vec_gen);
@@ -109,13 +110,11 @@ vett_norm_genuino=vec_gen/max_genuino;
 max_impostore=max(vec_imp);
 vett_norm_impostore=vec_imp/max_impostore;
 
-s = strcat(sName, '\vettore_norm_genuini.mat');
+s = strcat(sName, '/vettore_norm_genuini.mat');
 save(s,'vett_norm_genuino');
-s = strcat(sName, '\vettore_norm_impostori.mat');
+s = strcat(sName, '/vettore_norm_impostori.mat');
 save(s,'vett_norm_impostore');
 
-S=std(vett_norm_impostore);
-S1=mean(vett_norm_genuino);
 approssimazione= 0.01;
 intervalli= 1/approssimazione;
 %raffiguriamo le ricorrenze degli score degli impostori e dei genuini NORMALIZZATI
@@ -151,8 +150,7 @@ for soglia=0:approssimazione:1
         vettore_FAR(1,indice)=1;
     end
 end
-
-s = strcat(sName, '\vettore_far.mat');
+s = strcat(sName, '/vettore_far.mat');
 save(s,'vettore_FAR');
 
 %calcoliamo il FRR
@@ -171,14 +169,12 @@ for soglia=0:approssimazione:1
         vettore_FRR(1,indice)=0;
     end
 end
-
-s = strcat(sName, '\vettore_frr.mat');
+s = strcat(sName, '/vettore_frr.mat');
 save(s,'vettore_FRR');
-%save('vettore_frr3D3.mat','vettore_FRR');
+
 %raffigriamo FAR e FRR insieme INTERPOLATI
-%invece di cubic abbiamo messo pchip 
-far_interp=interp1(1:intervalli+1,vettore_FAR,1:.1:intervalli+1,'pchip'); %0.1 sarebbe dividere per 10 un tratto = 9 punti in più per ogni 2 punti del vettore... (12-1)*9 + 12
-frr_interp=interp1(1:intervalli+1,vettore_FRR,1:.1:intervalli+1,'pchip'); %0.1 sarebbe dividere per 10 un tratto = 9 punti in più per ogni 2 punti del vettore... (12-1)*9 + 12
+far_interp=interp1(1:intervalli+1,vettore_FAR,1:.1:intervalli+1,'cubic'); %0.1 sarebbe dividere per 10 un tratto = 9 punti in più per ogni 2 punti del vettore... (12-1)*9 + 12
+frr_interp=interp1(1:intervalli+1,vettore_FRR,1:.1:intervalli+1,'cubic'); %0.1 sarebbe dividere per 10 un tratto = 9 punti in più per ogni 2 punti del vettore... (12-1)*9 + 12
 figure2=figure;
 axes1 = axes('Parent',figure2);
 ylim(axes1,[0 1.05]);
@@ -196,8 +192,8 @@ legend5 = legend(axes1,'show');
 set(legend5,'Position',[0.152380952380951 0.684126984126991 0.15 0.1]);
 
 %cerchiamo il valore di intersezione tra FAR e FRR
-%dimensione=size(far_interp); % CALCOLO RIGA E COLONNE MATRICE
-dimensionecolonne=length(far_interp);%dimensione(2);
+dimensione=size(far_interp); % CALCOLO RIGA E COLONNE MATRICE
+dimensionecolonne=dimensione(2);
 
 for i=1:dimensionecolonne
     EER_Y(1,i)=abs((far_interp(1,i)-frr_interp(1,i)))/2;
@@ -208,28 +204,30 @@ end
 eer_x_ML=(eer_x2-1)*0.001;  %soglia
 eer_y_ML=far_interp(eer_x2);%probabilità di errore
 
-s = strcat(sName, '\EER_ML.mat');
+s = strcat(sName, '/EER_ML.mat');
 save(s,'eer_x_ML','eer_y_ML');
 
 % %DET Curve
-vettore_far_ml=vettore_FAR.*100;
-% vettore_frr_ml=vettore_FRR.*100;
-% vettore_gmr_ml=(1-vettore_FRR).*100;
-% 
-% figure3=figure;
-% axes1 = axes('Parent',figure3,'FontSize',10,'FontName','Times New Roman');
-% ylim(axes1,[0 12]);
-% xlim(axes1,[0 12]);
-% box(axes1,'on');
-% hold(axes1,'all');
-% plot1=plot(vettore_far_ml,vettore_frr_ml,'Parent',axes1,'LineWidth',1.5);
-% xlabel('False Acceptance Rate (%)','FontSize',12,'FontName','Times New Roman');
+vettore_far_ml=vettore_FAR;
+vettore_frr_ml=vettore_FRR;
+vettore_gmr_ml=(1-vettore_FRR).*100;
 
-% ylabel('False Rejection Rate (%)','FontSize',12,'FontName','Times New Roman');
-% EER_x=0.3020;
-% EER_y=0.0019;
-% hold on;
-% plot(EER_x,EER_y,'-ko','MarkerSize',5,'MarkerFaceColor','k');
+figure3=figure;
+axes1 = axes('Parent',figure3,'FontSize',10,'FontName','Times New Roman');
+ylim(axes1,[0 1]);
+xlim(axes1,[0 1]);
+box(axes1,'on');
+hold(axes1,'all');
+% vettore_far_ml_approx = smooth(vettore_far_ml, 0.2);
+% vettore_frr_ml_approx = smooth(vettore_frr_ml, 0.2);
+% plot1=plot(vettore_far_ml_approx,vettore_frr_ml_approx,'Parent',axes1,'LineWidth',1.5);
+xlabel('False Acceptance Rate (%)','FontSize',12,'FontName','Times New Roman');
+
+ylabel('False Rejection Rate (%)','FontSize',12,'FontName','Times New Roman');
+EER_x=0.3020;
+EER_y=0.0019;
+hold on;
+plot(EER_x,EER_y,'-ko','MarkerSize',5,'MarkerFaceColor','k');
 
 %%%%%%%%%%%%%%GRAFICI PER GCI%%%%%%%%%%%%%%%%%%%%
 % TabGenML4passate = cell2table(tabellaGenuinoML4passate, 'VariableNames',{'Utente1' 'Utente2' 'Score'});

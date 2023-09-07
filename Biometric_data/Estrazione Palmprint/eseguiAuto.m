@@ -1,5 +1,5 @@
 startTime_mainScript = tic;
-estrazioneImmaginiProfondita;
+%estrazioneImmaginiProfonditea;
 generaTemplate2D;
 generaTemplate3D;
 identificazione2D;

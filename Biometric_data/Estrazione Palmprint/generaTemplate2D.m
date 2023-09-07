@@ -39,8 +39,8 @@ for k = 1:numFiles
         % nomeUtente = sprintf('%s-%s-%s-%s', utenteParts{end-2:end}, num2str(profondita));
         
         fullPathName = fullfile(subFolderPath, filesJpg(i).name);
-        [dilatedImageDat, rgbImage] = estrazioneLinee(fullPathName, i, nomeUtente); % Modificato nomeSalv
-        
+        [dilatedImageDat, rgbImage] = metodoNardiello(fullPathName, i, nomeUtente); % Modificato nomeSalv
+        dilatedImageDat = imresize(dilatedImageDat, [259 259], 'bicubic'); % ----> 37 % originale      
         fileDatName = sprintf('TEMPLATE%d.dat', i);
         imwrite(dilatedImageDat, fullfile(saveDir, utenteCorrente, [fileDatName(1:end-4) '.jpg']));
         dlmwrite(fullfile(saveDir, utenteCorrente, fileDatName), dilatedImageDat);
