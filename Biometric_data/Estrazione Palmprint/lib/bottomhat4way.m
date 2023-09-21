@@ -19,7 +19,7 @@ n=141; %deve essere dispari (101 sembra buono)
 %Orizzontale
 se0=strel('line',n,0);
 tophatFiltered0 = imbothat(img,se0);
-imwrite(tophatFiltered0,'horizontal.jpg');
+%imwrite(tophatFiltered0,'horizontal.jpg');
 %imshow(tophatFiltered00);
 %figure;
 

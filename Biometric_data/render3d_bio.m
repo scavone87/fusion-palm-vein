@@ -18,7 +18,7 @@ depth = 0.2;
 thick = 0.2;
 
 % flag di trasparenza (0: intensità, 1: lineare rispetto alla profondità)
-trans_flag = 0;
+trans_flag = 1;
 
 % Rilevazione della superficie
 % Matrice dell'indice di profondità

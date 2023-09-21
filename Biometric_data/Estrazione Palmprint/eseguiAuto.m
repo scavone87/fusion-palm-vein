@@ -1,9 +1,9 @@
 startTime_mainScript = tic;
-%estrazioneImmaginiProfonditea;
+estrazioneImmaginiProfondita;
 generaTemplate2D;
 generaTemplate3D;
-identificazione2D;
-identificazione3D;
+% identificazione2D;
+% identificazione3D;
 % Fine tempo di esecuzione dello script principale
 endTime_mainScript = toc(startTime_mainScript);
 

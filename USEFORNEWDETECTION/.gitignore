@@ -1,0 +1,16 @@
+CLEANED
+Grafici_2D
+Grafici_2D_noclean
+Grafici_2D_noclean_vecchi
+Grafici_3D
+Grafici_3D_noclean
+Grafici_3D_noclean_vecchi
+Risultati_rete
+Template2D
+Template3D
+template_2D
+template_3D
+*.mat
+*.run
+*.sh
+*.h5
