@@ -14,11 +14,16 @@ istante = str2num(x{:});
 nomeUtente=char(utente(1));
 p=pantografo_acqua;
 p.tornaOrigine;
+% p=p.settaVelocita(400); % per immagini 192x250x256 con PRF 8Khz
+p = p.settaVelocita(390); % per immagini 192x300x320 con PRF 10Khz
+%p = p.settaVelocita(200); % per immagini 192x400x256 con PRF 16Khz
+
 
 num_acqusiszioni = iterazioni-1;
 for i = istante:num_acqusiszioni + istante
     completamento = (i+1)/ num_acqusiszioni
-    palmoIstanteN(i, nomeUtente)
+    palmoIstanteN(i, nomeUtente);
+    %palmoIstanteN_ritorno(10*i,nomeUtente);
     close all;
     clc;
 end

@@ -34,6 +34,7 @@ pathnameBS = [pwd '\BSCAN' '\'];
 DataObj=DataUlaopBaseBand(fileUOB);
 
 %% Prelevo le informazioni sull'acquisizione
+parametri_acquisizione = {};
 % Dimensioni dell'immagine 3D
 dimZ = DataObj.uos.info.blocklength.num;             % Dimensione Z dell'immagine
 dimX = DataObj.uop.item0.global.nlines.num;         % Dimensione X dell'immagine
@@ -54,6 +55,19 @@ scansione_meccanica = 38; % dimensione in mm. La sonda si muove lungo y da 16 a 
 lunghezza_sonda = 38.4; % dimensione in mm.
 phys_pitch= 0.2;  % - phys_pitch: Passo fisico della sonda selezionata in millimetri.
 repr_pitch = 0.2; % - repr_pitch: Passo di rappresentazione della sonda selezionata in millimetri.
+
+parametri_acquisizione.dimZ = dimZ;
+parametri_acquisizione.dimX = dimX;
+parametri_acquisizione.dimY = dimY;
+parametri_acquisizione.RYMIN = RYMIN;
+parametri_acquisizione.RYMAX = RYMAX;
+parametri_acquisizione.profondita_campo = profondita_campo;
+parametri_acquisizione.sound_speed = sound_speed;
+parametri_acquisizione.f_burst = fs;
+parametri_acquisizione.ndec = Ndec;
+parametri_acquisizione.focus = focus;
+parametri_acquisizione.PRF = PRF;
+parametri_acquisizione.TGC = [TGCA, TGCB];
 
 %% Salvo le informazioni per effettuare l'interpolazione
 v = visualization;

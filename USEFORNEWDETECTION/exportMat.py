@@ -9,8 +9,8 @@ import os
 data_dict = {}
 data_dict2d = {}
 i = 1
-for array in os.listdir("CLEANED"):
-    centroidi = np.load("CLEANED/" + array)
+for array in os.listdir("Risultati_rete"):
+    centroidi = np.load("Risultati_rete/" + array)
     print(centroidi.shape)
     # Estrazione delle coordinate y, x e z dai punti filtrati
     x_coords = np.array([int(point[0]) for point in centroidi])

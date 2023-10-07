@@ -8,9 +8,9 @@ dimZ = 320
 dimX = 835
 dimY = 820
 # Carica i dati dei centroidi dal file "valori.npy"
-for array in os.listdir("CLEANED"):
+for array in os.listdir("Risultati_rete"):
 
-    centroidi = np.load("CLEANED/" + array)
+    centroidi = np.load("Risultati_rete/" + array)
     print(len(centroidi))
 
     fig = plt.figure()

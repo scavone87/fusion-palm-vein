@@ -5,7 +5,7 @@
 %%%%%%%2D RENDERING MODULE%%%%%%%%%
 close all;
 clc 
-clearvars -except M X Y Z v fileUOB pixel_length
+clearvars -except M X Y Z v fileUOB pixel_length parametri_acquisizione
 
 [fileRisultati, path] = uigetfile('*.mat','Seleziona il file .mat dei risultati');
 % load Risultati3DCodiceMarino.mat;

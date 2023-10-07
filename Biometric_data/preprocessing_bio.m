@@ -38,8 +38,8 @@ matFolder = fullfile(pwd, folderMatfiles, '\');
 
 % Generazione del nome del file di acquisizione per il salvataggio
 out=regexp(pathnameUOB,'\','split');
-nomeAcquisizione = strcat(string(out(end-1)), '_', string(out(end)), filenameuob(6:9), ".mat"); % per lo script di creazione automatica del database dei .mat
-% nomeAcquisizione = strcat(string(out(end)), filenameuob(6:9), ".mat") % Nome senza data
+% nomeAcquisizione = strcat(string(out(end-1)), '_', string(out(end)), filenameuob(6:9), ".mat"); % per lo script di creazione automatica del database dei .mat
+nomeAcquisizione = strcat(string(out(end)), filenameuob(6:9), ".mat") % Nome senza data
 
 % nomeAcquisizione = strcat(string(out(end-1)), filenameuob(6:9), ".mat"); % per la creazione dei singoli .mat
 matFile = strcat(matFolder, nomeAcquisizione);

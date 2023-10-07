@@ -2,7 +2,7 @@ clear all
 clc
 
 % Richiedi all'utente di selezionare una cartella
-initialPath = uigetdir('Seleziona una cartella al livello superiore');
+initialPath = uigetdir('Seleziona la cartella contenente gli utenti');
 
 % Controlla se l'utente ha annullato la selezione della cartella
 if initialPath == 0

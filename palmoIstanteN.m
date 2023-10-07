@@ -1,10 +1,7 @@
 function [ ] = palmoIstanteN( n ,nomeUtente)
 
 p=pantografo_acqua;
-% p=p.settaVelocita(400); % per immagini 192x250x256 con PRF 8Khz
-p = p.settaVelocita(390); % per immagini 192x300x320 con PRF 10Khz
-configurazioniBMode;
-
+configurazioniBMode
 %nomeUtente passato come parametro in ingresso alla funzione
 mkdir('C:\PcLab\Acquisizioni\',nomeUtente);
 
