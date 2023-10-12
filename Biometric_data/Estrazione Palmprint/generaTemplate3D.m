@@ -29,6 +29,16 @@ mkdir(fullfile(template3DIstantiDir, 'istante007'));
 mkdir(fullfile(template3DIstantiDir, 'istante008'));
 mkdir(fullfile(template3DIstantiDir, 'istante009'));
 mkdir(fullfile(template3DIstantiDir, 'istante010'));
+mkdir(fullfile(template3DIstantiDir, 'istante011'));
+mkdir(fullfile(template3DIstantiDir, 'istante012'));
+mkdir(fullfile(template3DIstantiDir, 'istante013'));
+mkdir(fullfile(template3DIstantiDir, 'istante014'));
+mkdir(fullfile(template3DIstantiDir, 'istante015'));
+mkdir(fullfile(template3DIstantiDir, 'istante016'));
+mkdir(fullfile(template3DIstantiDir, 'istante017'));
+mkdir(fullfile(template3DIstantiDir, 'istante018'));
+mkdir(fullfile(template3DIstantiDir, 'istante019'));
+
 
 
 files=dir(fullfile(path, '*.mat'));
