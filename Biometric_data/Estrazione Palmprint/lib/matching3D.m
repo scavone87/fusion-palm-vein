@@ -20,3 +20,6 @@ function score = matching3D(R, Q, alpha)
     % Calcola il punteggio finale.
     score = (2 * sum(sum(combinedMatch))) / (MR + MQ);
 end
+
+
+

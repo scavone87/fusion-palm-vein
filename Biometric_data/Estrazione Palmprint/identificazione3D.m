@@ -21,7 +21,7 @@ startTime_identificazioneMatching3D = tic;
 sp=1;
 tabellaFinale=cell(sp,3);
 % [nomestructmat, pathstructmat]=uiputfile('.mat','Save struct .mat');
-nomestructmat = "Statistiche3D_DBRidotto";
+nomestructmat = "Statistiche3D_dbCompleto_NardielloNoFill.mat";
 pathstructmat = fullfile(pwd, '\');
 numeroCartella=3;
 numeroRisultato=1;
@@ -62,6 +62,7 @@ for i=1:n
     fprintf('Valore di i: %0.f \n', i);
     parfor j=(i+1):n
         tmp2 = arrayTemplate{j,1};
+%         score(i,j) = matching3D(tmp1, tmp2, 3);
         score(i,j) = matching13L(tmp1, tmp2);
         % disp(['confronto ' num2str(i) '.' num2str(j) ' effettuato']);
     end

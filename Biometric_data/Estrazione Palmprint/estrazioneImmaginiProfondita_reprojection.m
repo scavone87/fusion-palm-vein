@@ -11,7 +11,7 @@ masterImagesFolderPath = fullfile(pwd, 'masterImages');
 % Ottieni la lista dei file .mat nella cartella
 matFiles = dir(fullfile(matFilesFolderPath, '*.mat'));
 
-generaImmagineMaster(matFilesFolderPath, masterImagesFolderPath);
+%generaImmagineMaster(matFilesFolderPath, masterImagesFolderPath);
 
 % Verifica se il cluster è già attivo
 currentPool = gcp('nocreate');
@@ -22,7 +22,7 @@ if isempty(currentPool)
 end
 
 startTime_generaImmaginiProfondita = tic;
-
+numUtenti = 0;
 parfor fileIdx = 1:length(matFiles)
     matFileName = matFiles(fileIdx).name;
     fprintf('Elaborazione di: %s\n', matFileName);
@@ -34,7 +34,7 @@ parfor fileIdx = 1:length(matFiles)
     username = strtok(matFileName, '_');
 
     % Carica l'immagine master corrispondente all'utente dal file system
-    masterImageFileName = fullfile(pwd, 'masterImages', [matFileName(1:end-7) '000_master.jpg']);
+    masterImageFileName = fullfile(pwd, 'masterImages', [username '_000_master.jpg']);
     masterImage = imread(masterImageFileName);
 
     %PARAMETRI
@@ -53,25 +53,19 @@ parfor fileIdx = 1:length(matFiles)
         [surf_filt, FFF] = surface_detection(M, tresh, filter_siz, depth, Z);
 
         % Utilizza l'immagine master generata nella prima iterazione come riferimento
-        slave = im2double(FFF); % Assicurati che le immagini siano in doppia precisione
-        if i == 2
-            % Esegui la registrazione delle immagini
-            [optimizer,metric] = imregconfig('monomodal');
-            tform = imregtform(slave, masterImage, 'rigid', optimizer, metric);
-        end
+        slave = FFF; % Assicurati che le immagini siano in doppia precisione
+        % if i == 2
+        %     % Esegui la registrazione delle immagini
+        [optimizer,metric] = imregconfig('monomodal');
+        tform = imregtform(slave, masterImage, 'rigid', optimizer, metric);
+        % end
+        % if contains(matFileName, '000')
+        %     movingRegistered = masterImage;
+        %     numUtenti = numUtenti + 1;
+        % else
+        %     movingRegistered = imwarp(slave, tform, 'OutputView', imref2d(size(masterImage)));
+        % end
         movingRegistered = imwarp(slave, tform, 'OutputView', imref2d(size(masterImage)));
-
-        % Converti l'immagine master in double se non lo è già
-        master = im2double(masterImage);
-
-        % Calcola l'Errore Quadratico Medio (MSE)
-        mse = immse(movingRegistered, master);
-
-        % Calcola l'Errore Quadratico Medio Normalizzato (NMSE)
-        nmse = mse / mean(master(:).^2);
-
-        %fprintf("Errore Quadratico Medio (MSE) per l'immagine %d: %.4f\n", i-1, mse);
-        %fprintf("Errore Quadratico Medio Normalizzato (NMSE) per l'immagine %d: %.4f\n", i-1, nmse);
 
         FileName = strcat('immagine_', num2str(i-1), '_', num2str(depth), '.jpg');
         path = fullfile(pwd, 'imageGeneratedFrom3D', matFileName(1:end-4));

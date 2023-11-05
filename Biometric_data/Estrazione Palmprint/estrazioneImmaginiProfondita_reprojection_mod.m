@@ -3,10 +3,10 @@ clearvars -except v pixel_length startTime_mainScript
 addpath("lib\");
 
 % Imposta il percorso della cartella contenente i file .mat
-matFilesFolderPath = fullfile(fileparts(pwd), 'Matfiles');
+matFilesFolderPath = fullfile(fileparts(pwd), 'Matfiles_dbRidotto');
 
 % Imposta il percorso della cartella contenente le immagini master
-masterImagesFolderPath = fullfile(pwd, 'masterImages');
+masterImagesFolderPath = fullfile(pwd, 'masterImages_nardielloNoFill_repro40');
 
 % Ottieni la lista dei file .mat nella cartella
 matFiles = dir(fullfile(matFilesFolderPath, '*.mat'));
@@ -50,7 +50,7 @@ parfor i = 1:length(users)
 
     %PARAMETRI
     tresh=64;
-    filter_siz=20;
+    filter_siz=40;
 
     M = data.M;
     Z = data.Z;

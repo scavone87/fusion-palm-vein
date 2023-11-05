@@ -52,10 +52,10 @@ closing=imclose(BW2, se);
 
 
 %imwrite(filling, strcat(filename,'_filling.jpg'));
-filling= imfill(closing,'holes');
+%filling= imfill(closing,'holes');
 
 %THINNING
-thinning= bwmorph(filling, 'thin', inf);
+thinning= bwmorph(closing, 'thin', inf);
 %imshow(thinning);title('thinning');figure;
 %imwrite(thinning, strcat(filename,'thinning.jpg'));
 

@@ -59,7 +59,7 @@ for i = 1:n
 end
 
 T = cell2table(tabellaFinale, 'VariableNames', {'Utente1', 'Utente2', 'Score'});
-save(fullfile(pwd, 'Statistiche2D_DBRidotto.mat'), 'T');
+save(fullfile(pwd, 'Statistiche2D_dbCompleto_NardielloNoFill.mat'), 'T');
 
 endTime_identificazioneMatching2D = toc(startTime_identificazioneMatching2D);
 fprintf('Tempo di esecuzione dello script identificazioneMatching2D: %.2f secondi\n', endTime_identificazioneMatching2D);

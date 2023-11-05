@@ -12,7 +12,7 @@ if isempty(currentPool)
 end
 
 startTime_generaTemplate3D = tic;
-path = fullfile(fileparts(pwd), 'Matfiles');
+path = fullfile(fileparts(pwd), 'Matfiles_dbCompleto');
 dirs=dir(fullfile(path));
 
 template3DDir = 'template3D\Template3D';

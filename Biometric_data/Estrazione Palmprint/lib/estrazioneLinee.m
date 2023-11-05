@@ -157,11 +157,11 @@ BW2 = ismember(L, find([S.Area] >= 50));
 % imshow(BW2);title('cleaning');figure;
 
 % chiusura buchi
-ChiusuraBuchi= imfill(imClosing,'holes');
+%ChiusuraBuchi= imfill(imClosing,'holes');
 % imshow(ChiusuraBuchi);title('filling');figure;
 
 % thinning
-Thinning= bwmorph(ChiusuraBuchi, 'thin', inf);
+Thinning= bwmorph(BW2, 'thin', inf);
 % imshow(Thinning);title('thinning');figure;
 
 % elimina linee piu corte di...

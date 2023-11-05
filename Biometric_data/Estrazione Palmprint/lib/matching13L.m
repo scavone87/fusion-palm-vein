@@ -1,4 +1,4 @@
-function [scoreFinale matFinaleB angoloScore rigaScore colonnaScore] = matching(mat1,mat2)
+function [scoreFinale matFinaleB angoloScore rigaScore colonnaScore] = matching13L(mat1,mat2)
     %DEFINIAMO I TEMPLATE DA CONFRONTARE
     %mat1=mat1.ans;
     %mat2=mat2.ans;

@@ -1,9 +1,3 @@
-Statistiche
-template2D
-template2D_repro
-template2D_noRepro
-template3D
-template3D_repro
-template3D_noRepro
-imageGeneratedFrom3D
+/*
+!/lib/
 *.mat

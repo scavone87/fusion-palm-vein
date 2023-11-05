@@ -3,7 +3,7 @@ clearvars -except v pixel_length startTime_mainScript
 addpath("lib\");
 
 % Imposta il percorso della cartella contenente i file .mat
-matFilesFolderPath = fullfile(fileparts(pwd), 'Matfiles');
+matFilesFolderPath = fullfile(fileparts(pwd), 'Matfiles_dbCompleto');
 
 % Ottieni la lista dei file .mat nella cartella
 matFiles = dir(fullfile(matFilesFolderPath, '*.mat'));
@@ -26,7 +26,7 @@ parfor fileIdx = 1:length(matFiles)
 
     %PARAMETRI
     tresh=64;   % Intensity treshold for surface detection (0 - 255)
-    filter_siz=20;  % Averaging filter
+    filter_siz=40;  % Averaging filter
 
     M = data.M;
     Z = data.Z;
